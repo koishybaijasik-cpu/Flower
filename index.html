@@ -1,0 +1,1444 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GARDENROSE - цветы и подарки</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --asset: url("file:///C:/Users/User/Downloads/1da3b1d1-c281-463c-98aa-ef9eafc4ee73.png");
+      --cherry: url("file:///C:/Users/User/Downloads/ae0ceae5551ebab0b2700f8fe37cf283.jpg");
+      --bouquet-main: url("https://images.unsplash.com/photo-1680563094046-5d846e2c59d1?auto=format&fit=crop&w=1400&q=80");
+      --bouquet-soft: url("https://images.unsplash.com/photo-1503513883989-25ef8b2f1a53?auto=format&fit=crop&w=1200&q=80");
+      --green: #1a3a2e;
+      --green-2: #2d5f4a;
+      --pink: #ffc4d0;
+      --pink-2: #ff9fb3;
+      --rose: #d4456e;
+      --rose-dark: #b23555;
+      --cream: #fffcfa;
+      --card: rgba(255, 252, 250, 0.95);
+      --border: rgba(255, 192, 203, 0.25);
+      --text: #1a1a1a;
+      --muted: #5a5a5a;
+      --shadow: 0 8px 32px rgba(212, 69, 110, 0.12);
+      --shadow-hover: 0 16px 48px rgba(212, 69, 110, 0.18);
+      --gradient-rose: linear-gradient(135deg, #ff9fb3 0%, #d4456e 100%);
+      --gradient-green: linear-gradient(135deg, #2d5f4a 0%, #1a3a2e 100%);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Inter", Arial, sans-serif;
+      background:
+        radial-gradient(circle at 15% 10%, rgba(255, 192, 203, 0.15), transparent 35%),
+        radial-gradient(circle at 85% 20%, rgba(45, 95, 74, 0.08), transparent 40%),
+        radial-gradient(circle at 50% 90%, rgba(255, 159, 179, 0.12), transparent 45%),
+        linear-gradient(180deg, #ffffff 0%, #fffcfa 50%, #fff8f5 100%);
+      color: var(--text);
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(255, 192, 203, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(45, 95, 74, 0.03) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      width: min(100%, 1160px);
+      margin: 0 auto;
+      padding: 22px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .rose-icon {
+      width: 42px;
+      height: 42px;
+      color: var(--pink-2);
+      display: inline-flex;
+    }
+
+    .rose-icon svg {
+      width: 100%;
+      height: 100%;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .hero {
+      min-height: 600px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 24px;
+      background:
+        linear-gradient(120deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 252, 250, 0.96) 40%, rgba(255, 248, 247, 0.3) 70%, rgba(255, 245, 246, 0.1) 100%),
+        var(--bouquet-main) center right / cover no-repeat;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .hero:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      left: -20px;
+      top: -20px;
+      width: 180px;
+      height: 180px;
+      background: var(--gradient-rose);
+      opacity: 0.08;
+      border-radius: 50%;
+      filter: blur(40px);
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(20px, 20px) scale(1.1); }
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 55%;
+      background:
+        linear-gradient(90deg, rgba(255, 253, 250, 0.6), transparent 30%),
+        radial-gradient(circle at 70% 35%, rgba(255,255,255,0.14), transparent 30%);
+      filter: saturate(1.05);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      width: 52%;
+      min-width: 520px;
+      padding: 64px 60px 50px;
+    }
+
+    .brand {
+      text-align: center;
+      margin-bottom: 44px;
+    }
+
+    h1,
+    h2,
+    .price-line,
+    .job-title {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      color: var(--green);
+      letter-spacing: 0;
+    }
+
+    h1 {
+      margin: 16px 0 10px;
+      font-size: 72px;
+      line-height: 0.9;
+      font-weight: 700;
+      background: var(--gradient-rose);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.02em;
+    }
+
+    .tagline {
+      color: #596653;
+      font-size: 18px;
+      font-weight: 500;
+      text-transform: uppercase;
+      max-width: 620px;
+      margin: 0 auto;
+    }
+
+    .benefits {
+      display: grid;
+      gap: 17px;
+      margin: 0 0 24px;
+      font-size: 19px;
+      line-height: 1.35;
+    }
+
+    .benefit,
+    .contact-row {
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: 13px;
+      align-items: center;
+    }
+
+    .mini-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: #bb6471;
+      border: 2px solid rgba(187, 100, 113, 0.52);
+      background: rgba(255, 255, 255, 0.72);
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .rating {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      font-size: 23px;
+      margin-bottom: 34px;
+    }
+
+    .star {
+      color: #ffbd25;
+      font-size: 30px;
+      line-height: 1;
+    }
+
+    .gift-card {
+      min-height: 116px;
+      border: 2px solid var(--border);
+      border-radius: 20px;
+      background:
+        linear-gradient(135deg, rgba(255, 228, 233, 0.9), rgba(255, 250, 248, 0.9));
+      box-shadow: var(--shadow);
+      display: grid;
+      grid-template-columns: 70px 1fr 132px;
+      gap: 18px;
+      align-items: center;
+      padding: 21px 24px;
+      color: var(--rose-dark);
+      font-size: 18px;
+      line-height: 1.5;
+      font-weight: 600;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+
+    .gift-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--pink-2);
+    }
+
+    .gift-card svg {
+      width: 54px;
+      height: 54px;
+      stroke: #a42e42;
+      fill: none;
+      stroke-width: 2.4;
+    }
+
+    .gift-products {
+      height: 78px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #fff4f4, #f8d9de);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .gift-products::before,
+    .gift-products::after {
+      content: "";
+      position: absolute;
+      border-radius: 5px;
+      background: #fff8f2;
+      box-shadow: 0 4px 10px rgba(112, 71, 70, 0.12);
+    }
+
+    .gift-products::before {
+      left: 20px;
+      top: 12px;
+      width: 45px;
+      height: 56px;
+      transform: rotate(-9deg);
+      border: 1px solid rgba(216, 151, 154, 0.42);
+    }
+
+    .gift-products::after {
+      right: 22px;
+      bottom: 8px;
+      width: 32px;
+      height: 54px;
+      border-radius: 11px 11px 5px 5px;
+      background: linear-gradient(#fff7ed 0 25%, #bd7a43 25% 100%);
+    }
+
+    .actions {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin: 26px 0 0;
+    }
+
+    .btn {
+      min-height: 58px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 0 20px;
+      box-shadow: var(--shadow);
+      font-weight: 700;
+      font-size: 15px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: left 0.5s;
+    }
+
+    .btn:hover::before {
+      left: 100%;
+    }
+
+    .btn:hover,
+    .btn:focus-visible,
+    .pill:hover,
+    .pill:focus-visible {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .btn:active {
+      transform: translateY(-1px) scale(0.98);
+    }
+
+    .btn.whatsapp {
+      color: #fff;
+      background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+      border: none;
+    }
+
+    .btn.instagram {
+      color: #fff;
+      background: linear-gradient(135deg, #f58529 0%, #dd2a7b 50%, #8134af 100%);
+      border: none;
+    }
+
+    .btn.map {
+      color: var(--green);
+      background: rgba(255,255,255,0.95);
+      border: 2px solid var(--border);
+      backdrop-filter: blur(10px);
+    }
+
+    .icon {
+      width: 23px;
+      height: 23px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex: 0 0 auto;
+    }
+
+    .section {
+      margin-top: 32px;
+      padding: 34px 0 0;
+      border-top: 1px solid rgba(218, 165, 168, 0.42);
+    }
+
+    .section-head {
+      text-align: center;
+      margin-bottom: 24px;
+      position: relative;
+    }
+
+    h2 {
+      margin: 8px 0 0;
+      font-size: 42px;
+      line-height: 1;
+      font-weight: 600;
+    }
+
+    .deal {
+      width: min(100%, 620px);
+      min-height: 330px;
+      margin: 42px auto 0;
+      border: 2px solid rgba(212, 69, 110, 0.3);
+      border-radius: 24px;
+      background:
+        linear-gradient(135deg, rgba(255, 237, 241, 0.98), rgba(255, 250, 248, 0.95));
+      box-shadow: var(--shadow);
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+
+    .deal:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--rose);
+    }
+
+    .deal-text {
+      padding: 34px 28px;
+    }
+
+    .deal-label {
+      color: var(--rose);
+      text-align: center;
+      text-transform: uppercase;
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    .price-line {
+      color: var(--rose);
+      font-size: 46px;
+      line-height: 0.95;
+      margin: 0 0 10px;
+      font-weight: 700;
+    }
+
+    .deal-sub {
+      margin: 0 0 30px;
+      font-size: 24px;
+      line-height: 1.25;
+    }
+
+    .timer {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .time-box {
+      width: 75px;
+      min-height: 74px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.95);
+      display: grid;
+      place-items: center;
+      padding: 8px 4px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      border: 2px solid var(--border);
+      transition: all 0.3s ease;
+    }
+
+    .time-box:hover {
+      transform: scale(1.05);
+      border-color: var(--rose);
+    }
+
+    .time-box strong {
+      font-size: 30px;
+      line-height: 1;
+      font-weight: 500;
+      color: #38423b;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .time-box span {
+      font-size: 10px;
+      text-transform: uppercase;
+      color: #666;
+    }
+
+    .timer-sep {
+      font-size: 28px;
+      color: #3f4842;
+      font-weight: 700;
+      transform: translateY(-8px);
+    }
+
+    .deal-image {
+      background:
+        linear-gradient(90deg, rgba(255, 244, 246, 0.16), rgba(255, 244, 246, 0.24)),
+        var(--bouquet-main) center 36% / cover no-repeat;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 34px;
+      align-items: start;
+      margin-top: 36px;
+    }
+
+    .works-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .photo {
+      background-image: var(--bouquet-main);
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-color: #fff0f1;
+    }
+
+    .work-photo {
+      aspect-ratio: 1 / 1;
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      border: 2px solid var(--border);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .work-photo:hover {
+      transform: scale(1.05) rotate(2deg);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--pink-2);
+      z-index: 10;
+    }
+
+    .work-photo:nth-child(1) { background-image: var(--bouquet-main); background-position: center 34%; }
+    .work-photo:nth-child(2) { background-image: var(--bouquet-soft); background-position: 64% center; }
+    .work-photo:nth-child(3) { background-image: var(--cherry); background-position: center 42%; }
+    .work-photo:nth-child(4) { background-image: var(--bouquet-main); background-position: 48% 58%; }
+    .work-photo:nth-child(5) { background-image: var(--bouquet-soft); background-position: 72% 62%; }
+    .work-photo:nth-child(6) { background-image: var(--cherry); background-position: 42% 38%; }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 38px;
+      padding: 0 20px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.95);
+      border: 2px solid var(--border);
+      box-shadow: var(--shadow);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--rose);
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+
+    .pill:hover {
+      background: var(--gradient-rose);
+      color: white;
+      border-color: var(--rose);
+      transform: translateY(-2px);
+    }
+
+    .section-head .pill {
+      position: static;
+      margin-top: 14px;
+    }
+
+    .catalog-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .product {
+      min-height: 166px;
+      border: 2px solid var(--border);
+      border-radius: 16px;
+      background: var(--card);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      padding: 10px 12px 13px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      backdrop-filter: blur(10px);
+    }
+
+    .product:hover,
+    .product:focus-visible {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--pink-2);
+    }
+
+    .product-img {
+      height: 88px;
+      margin-bottom: 12px;
+      border-radius: 12px;
+      background-image: var(--bouquet-main);
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-color: #fff1f1;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s ease;
+    }
+
+    .product:hover .product-img {
+      transform: scale(1.05);
+    }
+
+    .product:nth-child(1) .product-img { background-image: var(--bouquet-main); background-position: center 34%; }
+    .product:nth-child(2) .product-img { background-image: var(--bouquet-main); background-position: 54% 50%; }
+    .product:nth-child(3) .product-img { background-image: var(--bouquet-soft); background-position: 72% 58%; }
+    .product:nth-child(4) .product-img,
+    .product:nth-child(5) .product-img,
+    .product:nth-child(6) .product-img,
+    .product:nth-child(7) .product-img,
+    .product:nth-child(8) .product-img,
+    .product:nth-child(10) .product-img {
+      background-image:
+        radial-gradient(circle at 32% 42%, rgba(250, 123, 163, 0.72) 0 22%, transparent 23%),
+        radial-gradient(circle at 58% 35%, rgba(255, 190, 204, 0.8) 0 21%, transparent 22%),
+        linear-gradient(180deg, #fff6f5, #f3e6df);
+    }
+    .product:nth-child(5) .product-img,
+    .product:nth-child(6) .product-img {
+      background-image:
+        linear-gradient(78deg, transparent 46%, #578157 47% 51%, transparent 52%),
+        linear-gradient(102deg, transparent 46%, #6d9b62 47% 51%, transparent 52%),
+        radial-gradient(ellipse at 38% 60%, #5f965f 0 17%, transparent 18%),
+        radial-gradient(ellipse at 58% 54%, #486f45 0 18%, transparent 19%),
+        linear-gradient(180deg, transparent 58%, #c7a27b 59% 84%, transparent 85%),
+        linear-gradient(180deg, #fff8f4, #efe5dc);
+    }
+    .product:nth-child(6) .product-img {
+      background-image:
+        radial-gradient(ellipse at 36% 60%, #c2a183 0 19%, transparent 20%),
+        radial-gradient(ellipse at 62% 56%, #d8c1a7 0 21%, transparent 22%),
+        linear-gradient(180deg, #fff8f4, #efe5dc);
+    }
+    .product:nth-child(7) .product-img {
+      background-image:
+        radial-gradient(circle at 38% 46%, #bc8753 0 18%, transparent 19%),
+        radial-gradient(circle at 61% 46%, #d5b286 0 16%, transparent 17%),
+        radial-gradient(circle at 34% 31%, #8d5f37 0 6%, transparent 7%),
+        radial-gradient(circle at 65% 31%, #a07a54 0 5%, transparent 6%),
+        linear-gradient(180deg, #fff8f4, #efe5dc);
+    }
+    .product:nth-child(8) .product-img {
+      background-image: var(--bouquet-soft);
+      background-position: 73% 58%;
+    }
+    .product:nth-child(9) .product-img {
+      background-image: var(--bouquet-main);
+      background-position: center 50%;
+    }
+    .product:nth-child(10) .product-img {
+      background-image:
+        radial-gradient(circle at 54% 46%, #f0dcc9 0 31%, transparent 32%),
+        radial-gradient(circle at 54% 46%, transparent 0 22%, #cfa66e 23% 24%, transparent 25%),
+        linear-gradient(180deg, #fff8f4, #efe5dc);
+    }
+    .product:nth-child(11) .product-img {
+      background-image:
+        radial-gradient(circle at 35% 48%, #9f2931 0 10%, transparent 11%),
+        radial-gradient(circle at 51% 45%, #d9414f 0 11%, transparent 12%),
+        radial-gradient(circle at 67% 52%, #b52e39 0 10%, transparent 11%),
+        linear-gradient(15deg, transparent 44%, #d5b38d 45% 72%, transparent 73%),
+        linear-gradient(180deg, #fff8f4, #efe5dc);
+    }
+
+    .product h3 {
+      margin: 0 0 6px;
+      color: #2e2d2a;
+      font-size: 16px;
+      line-height: 1.2;
+    }
+
+    .product p {
+      margin: 0;
+      color: #4f4f4a;
+      font-size: 14px;
+      line-height: 1.3;
+    }
+
+    .product.sale h3,
+    .product.combo h3 {
+      color: var(--rose);
+    }
+
+    .product.wide {
+      grid-column: span 2;
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .product.wide .product-img {
+      height: 90px;
+      margin: 0;
+      order: 2;
+    }
+
+    .promos {
+      display: grid;
+      gap: 13px;
+    }
+
+    .promo {
+      min-height: 102px;
+      border: 2px solid var(--border);
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(255, 230, 235, 0.95), rgba(255, 250, 248, 0.95));
+      box-shadow: var(--shadow);
+      display: grid;
+      grid-template-columns: 1fr 190px;
+      gap: 14px;
+      align-items: center;
+      padding: 15px 18px;
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+
+    .promo:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--pink-2);
+    }
+
+    .promo strong {
+      display: block;
+      color: var(--rose);
+      font-size: 17px;
+      margin-bottom: 7px;
+      text-transform: uppercase;
+    }
+
+    .promo b {
+      display: block;
+      color: var(--rose);
+      font-size: 18px;
+      margin-bottom: 3px;
+    }
+
+    .promo p {
+      margin: 0;
+      line-height: 1.35;
+    }
+
+    .promo-img {
+      height: 82px;
+      border-radius: 12px;
+      background-image: var(--bouquet-main);
+      background-repeat: no-repeat;
+      background-size: cover;
+      border: 2px solid var(--border);
+      transition: transform 0.3s ease;
+    }
+
+    .promo:hover .promo-img {
+      transform: scale(1.05);
+    }
+
+    .promo:nth-child(1) .promo-img { background-image: var(--bouquet-main); background-position: center 45%; }
+    .promo:nth-child(2) .promo-img { background-image: var(--bouquet-soft); background-position: 74% 58%; }
+    .promo:nth-child(3) {
+      background: linear-gradient(90deg, rgba(255, 236, 240, 0.96) 0%, rgba(255, 248, 248, 0.92) 59%, #15374b 100%);
+    }
+    .promo:nth-child(3) .promo-img {
+      background-image:
+        radial-gradient(circle at 80% 20%, #ffd98c 0 8%, transparent 9%),
+        linear-gradient(180deg, transparent 43%, #f0f6fb 44% 73%, transparent 74%),
+        linear-gradient(90deg, transparent 18%, #5e95b1 19% 72%, transparent 73%),
+        linear-gradient(180deg, #143348, #1e4d68);
+    }
+
+    .review-panel {
+      max-width: 620px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .score {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      margin: 12px 0 26px;
+    }
+
+    .score strong {
+      font-size: 43px;
+      font-weight: 500;
+      color: #111;
+    }
+
+    .stars {
+      color: #f7b91f;
+      font-size: 31px;
+      letter-spacing: 1px;
+      white-space: nowrap;
+    }
+
+    .count {
+      min-height: 40px;
+      padding: 0 18px;
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      background: rgba(239, 229, 228, 0.86);
+      font-weight: 500;
+    }
+
+    .review-list {
+      display: grid;
+      gap: 13px;
+    }
+
+    .review {
+      min-height: 104px;
+      border: 2px solid var(--border);
+      border-radius: 20px;
+      background: rgba(255, 248, 247, 0.95);
+      box-shadow: var(--shadow);
+      display: grid;
+      grid-template-columns: 92px 1fr;
+      align-items: center;
+      gap: 24px;
+      padding: 10px 24px 10px 16px;
+      text-align: left;
+      font-size: 20px;
+      line-height: 1.32;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+
+    .review:hover {
+      transform: translateX(8px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--pink-2);
+    }
+
+    .avatar {
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      background: var(--gradient-rose);
+      box-shadow: var(--shadow);
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-size: 27px;
+      font-weight: 700;
+      transition: transform 0.3s ease;
+    }
+
+    .review:hover .avatar {
+      transform: scale(1.1) rotate(5deg);
+    }
+
+    .review:nth-child(1) .avatar::after { content: "А"; }
+    .review:nth-child(2) .avatar::after { content: "М"; }
+    .review:nth-child(3) .avatar::after { content: "Д"; }
+
+    .contacts {
+      max-width: 520px;
+      margin: 0 auto;
+      display: grid;
+      gap: 17px;
+    }
+
+    .contact-row {
+      grid-template-columns: 46px 1fr;
+      font-size: 19px;
+      line-height: 1.35;
+    }
+
+    .contact-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #de7187;
+      color: #fff;
+    }
+
+    .contact-row:nth-child(2) .contact-icon { background: #e28a98; }
+    .contact-row:nth-child(3) .contact-icon { background: #c7afa8; }
+
+    .map-card {
+      height: 260px;
+      border-radius: 20px;
+      border: 2px solid var(--border);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+      background: #f2e8df;
+      display: block;
+      transition: all 0.3s ease;
+    }
+
+    .map-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--pink-2);
+    }
+
+    .map-card iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+      filter: saturate(0.95);
+    }
+
+    .map-open {
+      position: absolute;
+      right: 14px;
+      bottom: 14px;
+      z-index: 2;
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.9);
+      color: #e05775;
+      font-weight: 700;
+      box-shadow: 0 7px 18px rgba(83, 63, 60, 0.16);
+    }
+
+    .job {
+      margin-top: 34px;
+      border: 2px solid var(--border);
+      border-radius: 24px;
+      background: linear-gradient(135deg, rgba(255, 201, 212, 0.95), rgba(255, 232, 236, 0.98) 45%, rgba(255, 202, 213, 0.92));
+      box-shadow: var(--shadow);
+      display: grid;
+      grid-template-columns: 285px 1fr 240px;
+      gap: 28px;
+      align-items: center;
+      min-height: 260px;
+      overflow: hidden;
+      padding: 18px 34px;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+
+    .job:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--rose);
+    }
+
+    .florist {
+      align-self: end;
+      height: 240px;
+      border-radius: 16px;
+      background: var(--bouquet-main) center 48% / cover no-repeat;
+      box-shadow: var(--shadow);
+      border: 2px solid var(--border);
+      transition: transform 0.3s ease;
+    }
+
+    .job:hover .florist {
+      transform: scale(1.05);
+    }
+
+    .job-title {
+      margin: 0 0 12px;
+      font-size: 50px;
+      line-height: 0.95;
+      font-weight: 600;
+    }
+
+    .salary {
+      display: inline-flex;
+      min-height: 40px;
+      align-items: center;
+      border-radius: 999px;
+      padding: 0 24px;
+      margin-bottom: 14px;
+      background: var(--gradient-rose);
+      color: #fff;
+      font-size: 20px;
+      font-weight: 700;
+      box-shadow: var(--shadow);
+      transition: all 0.3s ease;
+    }
+
+    .salary:hover {
+      transform: scale(1.05);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .job ul {
+      margin: 0 0 16px;
+      padding-left: 19px;
+      line-height: 1.55;
+      font-weight: 500;
+    }
+
+    .job li::marker {
+      color: var(--green-2);
+    }
+
+    .tools {
+      height: 170px;
+      border-radius: 10px;
+      background:
+        radial-gradient(circle at 70% 42%, #f39aad 0 10%, transparent 11%),
+        radial-gradient(circle at 58% 47%, #ffd0d7 0 12%, transparent 13%),
+        linear-gradient(76deg, transparent 42%, #5f8d55 43% 47%, transparent 48%),
+        linear-gradient(106deg, transparent 42%, #6fa063 43% 47%, transparent 48%),
+        linear-gradient(180deg, #fff7f4, #f6dde3);
+    }
+
+    .footer {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      padding: 18px 8px 0;
+      color: #c85266;
+      font-size: 14px;
+    }
+
+    @media (max-width: 980px) {
+      .hero {
+        min-height: 0;
+        border-radius: 20px;
+      }
+
+      .hero::after {
+        opacity: 0.32;
+        width: 100%;
+        background-position: right 40px;
+      }
+
+      .hero-content {
+        width: 100%;
+        min-width: 0;
+        padding: 48px 32px 40px;
+      }
+
+      .actions {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .catalog-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .job {
+        grid-template-columns: 210px 1fr;
+      }
+
+      .tools {
+        display: none;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .page {
+        padding: 0;
+      }
+
+      .hero {
+        border-radius: 0;
+      }
+
+      .hero-content {
+        padding: 42px 18px 28px;
+      }
+
+      h1 {
+        font-size: 38px;
+      }
+
+      .tagline,
+      .benefits {
+        font-size: 13px;
+        line-height: 1.35;
+      }
+
+      .tagline {
+        max-width: 310px;
+      }
+
+      .rating {
+        font-size: 18px;
+      }
+
+      .gift-card {
+        grid-template-columns: 48px 1fr;
+        padding: 18px;
+        font-size: 15px;
+      }
+
+      .gift-products {
+        display: none;
+      }
+
+      .deal {
+        margin-top: 22px;
+        grid-template-columns: 1.12fr 0.88fr;
+        min-height: 0;
+      }
+
+      .deal-text {
+        padding: 24px 14px;
+        position: relative;
+      }
+
+      .deal-image {
+        min-height: 250px;
+        margin-top: 0;
+        background-size: cover;
+        background-position: center;
+      }
+
+      .deal-label {
+        font-size: 20px;
+      }
+
+      .price-line {
+        font-size: 31px;
+      }
+
+      .deal-sub {
+        font-size: 18px;
+      }
+
+      .timer {
+        gap: 6px;
+        flex-wrap: nowrap;
+      }
+
+      .time-box {
+        width: 61px;
+        min-height: 66px;
+      }
+
+      .time-box strong {
+        font-size: 25px;
+      }
+
+      h2 {
+        font-size: 34px;
+      }
+
+      .section {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      .section-head .pill {
+        position: static;
+        margin-top: 14px;
+      }
+
+      .works-grid,
+      .catalog-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .product.wide {
+        grid-column: auto;
+        display: block;
+      }
+
+      .product.wide .product-img {
+        height: 88px;
+        margin-bottom: 12px;
+      }
+
+      .promo {
+        grid-template-columns: 1fr;
+      }
+
+      .promo-img {
+        height: 108px;
+      }
+
+      .score {
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .review {
+        grid-template-columns: 72px 1fr;
+        gap: 14px;
+        padding: 10px 14px;
+        font-size: 15px;
+      }
+
+      .avatar {
+        width: 68px;
+        height: 68px;
+        background-size: 700px auto;
+      }
+
+      .contact-row {
+        font-size: 15px;
+      }
+
+      .job {
+        margin: 24px 14px 0;
+        display: block;
+        text-align: center;
+        padding: 18px;
+      }
+
+      .florist {
+        width: 180px;
+        height: 190px;
+        margin: 0 auto 10px;
+        background-size: 660px auto;
+        background-position: -28px -1268px;
+      }
+
+      .job-title {
+        font-size: 36px;
+      }
+
+      .job ul {
+        display: inline-block;
+        text-align: left;
+      }
+
+      .job .btn {
+        width: 100% !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <div class="hero-content">
+        <header class="brand">
+          <span class="rose-icon" aria-hidden="true">
+            <svg viewBox="0 0 64 64"><path d="M32 58V36"/><path d="M32 36c-12-3-18-11-18-21 9-4 16 1 18 9 2-8 9-13 18-9 0 10-6 18-18 21Z"/><path d="M24 26c0-6 3-10 8-10s8 4 8 10c0 5-4 8-8 8s-8-3-8-8Z"/><path d="M32 43c-7 0-13 3-17 8M32 46c7 0 13 3 17 8"/></svg>
+          </span>
+          <h1>GARDENROSE</h1>
+          <div class="tagline">JUREKTEN JUREKKE - МИР ЦВЕТОВ И ПОДАРКОВ</div>
+        </header>
+
+        <div class="benefits">
+          <div class="benefit"><span class="mini-icon">⊙</span><span>Свежие цветы каждый день</span></div>
+          <div class="benefit"><span class="mini-icon">↗</span><span>Быстрая доставка по Астане</span></div>
+          <div class="benefit"><span class="mini-icon">◷</span><span>Работаем до 01:00 (принимаем поздние заказы)</span></div>
+        </div>
+
+        <div class="rating">
+          <span class="star">★</span>
+          <span>5★</span>
+          <span>(95 отзывов)</span>
+        </div>
+
+        <article class="gift-card">
+          <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M10 25h44v29H10zM8 17h48v10H8zM32 17v37M16 17c-1-8 9-11 16 0M48 17c1-8-9-11-16 0"/></svg>
+          <div>К каждому заказу:<br>открытка + витамины для цветов<br>в подарок</div>
+          <div class="gift-products" aria-hidden="true"></div>
+        </article>
+
+        <nav class="actions" aria-label="Основные ссылки">
+          <a class="btn whatsapp" href="https://wa.me/77002607218?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D1%85%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%20%D0%B1%D1%83%D0%BA%D0%B5%D1%82" target="_blank" rel="noopener">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M20 11.5a8.4 8.4 0 0 1-12.5 7.3L3 20l1.3-4.2A8.4 8.4 0 1 1 20 11.5Z"/><path d="M9 8.5c.2 3.2 2.1 5.3 5.3 6 .5.1 1-.2 1.2-.6l.4-.8c.1-.3 0-.6-.2-.8l-1.1-.8c-.3-.2-.7-.2-1 0l-.5.4c-.9-.5-1.6-1.2-2.1-2.1l.4-.5c.2-.3.2-.7 0-1L10.6 7c-.2-.3-.5-.4-.8-.3l-.8.3c-.4.2-.7.7-.6 1.2Z"/></svg>
+            WhatsApp
+          </a>
+          <a class="btn instagram" href="https://www.instagram.com/____jasik______?igsh=dzZiZ2NjaDVkYW03&utm_source=qr" target="_blank" rel="noopener">
+            <svg class="icon" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="5"/><circle cx="12" cy="12" r="3.5"/><path d="M17 7.2h.01"/></svg>
+            Instagram
+          </a>
+          <a class="btn map" href="https://2gis.kz/astana/firm/70000001109974083?m=71.496629%2C51.118084%2F13.19" target="_blank" rel="noopener">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+            2ГИС
+          </a>
+        </nav>
+      </div>
+    </section>
+
+    <section class="deal">
+      <div class="deal-text">
+        <div class="deal-label">Акция дня!</div>
+        <p class="price-line">25 роз = 25 000₸</p>
+        <p class="deal-sub">бенто или шар в подарок</p>
+        <div class="timer" aria-label="Таймер акции">
+          <div class="time-box"><strong id="hours">02</strong><span>часов</span></div>
+          <span class="timer-sep">:</span>
+          <div class="time-box"><strong id="minutes">15</strong><span>минут</span></div>
+          <span class="timer-sep">:</span>
+          <div class="time-box"><strong id="seconds">47</strong><span>секунд</span></div>
+        </div>
+      </div>
+      <div class="deal-image" aria-hidden="true"></div>
+    </section>
+
+    <div class="layout">
+      <section class="section">
+        <div class="section-head">
+          <span class="rose-icon" aria-hidden="true"><svg viewBox="0 0 64 64"><path d="M32 58V36"/><path d="M32 36c-12-3-18-11-18-21 9-4 16 1 18 9 2-8 9-13 18-9 0 10-6 18-18 21Z"/><path d="M24 26c0-6 3-10 8-10s8 4 8 10c0 5-4 8-8 8s-8-3-8-8Z"/></svg></span>
+          <h2>Наши работы</h2>
+          <a class="pill" href="#catalog">Смотреть все</a>
+        </div>
+        <div class="works-grid">
+          <div class="photo work-photo"></div>
+          <div class="photo work-photo"></div>
+          <div class="photo work-photo"></div>
+          <div class="photo work-photo"></div>
+          <div class="photo work-photo"></div>
+          <div class="photo work-photo"></div>
+        </div>
+      </section>
+
+      <section class="section" id="catalog">
+        <div class="section-head">
+          <span class="rose-icon" aria-hidden="true"><svg viewBox="0 0 64 64"><path d="M32 58V36"/><path d="M32 36c-12-3-18-11-18-21 9-4 16 1 18 9 2-8 9-13 18-9 0 10-6 18-18 21Z"/><path d="M24 26c0-6 3-10 8-10s8 4 8 10c0 5-4 8-8 8s-8-3-8-8Z"/></svg></span>
+          <h2>Каталог товаров</h2>
+        </div>
+        <div class="catalog-grid">
+          <a class="product" href="https://wa.me/77002607218?text=%D0%93%D0%BE%D0%BB%D0%BB%D0%B0%D0%BD%D0%B4%D1%81%D0%BA%D0%B8%D0%B5%20%D1%80%D0%BE%D0%B7%D1%8B" target="_blank" rel="noopener"><div class="product-img"></div><h3>1. Голландские розы</h3><p>от 790₸</p></a>
+          <a class="product sale" href="https://wa.me/77002607218?text=%D0%90%D0%BA%D1%86%D0%B8%D1%8F%2025%20%D1%80%D0%BE%D0%B7" target="_blank" rel="noopener"><div class="product-img"></div><h3>2. Акция</h3><p>25 роз = 25 000₸<br>бенто/шар в подарок</p></a>
+          <a class="product combo" href="https://wa.me/77002607218?text=%D0%9A%D0%BE%D0%BC%D0%B1%D0%BE%20%D1%86%D0%B2%D0%B5%D1%82%D1%8B%20%D0%B8%20%D1%81%D0%BB%D0%B0%D0%B4%D0%BE%D1%81%D1%82%D0%B8" target="_blank" rel="noopener"><div class="product-img"></div><h3>3. Комбо + сладости</h3><p>от 10 000₸</p></a>
+          <a class="product" href="https://wa.me/77002607218?text=%D0%93%D0%B5%D0%BB%D0%B8%D0%B5%D0%B2%D1%8B%D0%B5%20%D1%88%D0%B0%D1%80%D1%8B" target="_blank" rel="noopener"><div class="product-img"></div><h3>4. Гелиевые шары</h3><p>от 900₸</p></a>
+          <a class="product" href="https://wa.me/77002607218?text=%D0%9A%D0%BE%D0%BC%D0%BD%D0%B0%D1%82%D0%BD%D1%8B%D0%B5%20%D1%86%D0%B2%D0%B5%D1%82%D1%8B" target="_blank" rel="noopener"><div class="product-img"></div><h3>5. Комнатные цветы</h3></a>
+          <a class="product" href="https://wa.me/77002607218?text=%D0%92%D0%B0%D0%B7%D1%8B" target="_blank" rel="noopener"><div class="product-img"></div><h3>6. Вазы</h3><p>10 000 - 20 000₸</p></a>
+          <a class="product" href="https://wa.me/77002607218?text=%D0%98%D0%B3%D1%80%D1%83%D1%88%D0%BA%D0%B8" target="_blank" rel="noopener"><div class="product-img"></div><h3>7. Игрушки</h3></a>
+          <a class="product" href="https://wa.me/77002607218?text=%D0%91%D0%BE%D0%BA%D1%81%D1%8B" target="_blank" rel="noopener"><div class="product-img"></div><h3>8. Боксы</h3><p>до 10 000₸</p></a>
+          <a class="product" href="https://wa.me/77002607218?text=%D0%9F%D1%80%D0%B5%D0%BC%D0%B8%D1%83%D0%BC%20%D0%BA%D0%BE%D1%80%D0%B7%D0%B8%D0%BD%D1%8B" target="_blank" rel="noopener"><div class="product-img"></div><h3>9. Премиум корзины</h3><p>20 000 - 30 000₸</p></a>
+          <a class="product" href="https://wa.me/77002607218?text=%D0%91%D0%B5%D0%BD%D1%82%D0%BE-%D1%82%D0%BE%D1%80%D1%82%D1%8B" target="_blank" rel="noopener"><div class="product-img"></div><h3>10. Бенто-торты</h3></a>
+          <a class="product wide" href="https://wa.me/77002607218?text=%D0%9A%D0%BB%D1%83%D0%B1%D0%BD%D0%B8%D0%BA%D0%B0%20%D0%B2%20%D1%88%D0%BE%D0%BA%D0%BE%D0%BB%D0%B0%D0%B4%D0%B5" target="_blank" rel="noopener"><div><h3>11. Клубника<br>в шоколаде</h3></div><div class="product-img"></div></a>
+        </div>
+      </section>
+    </div>
+
+    <section class="section">
+      <div class="section-head">
+        <span class="rose-icon" aria-hidden="true"><svg viewBox="0 0 64 64"><path d="M32 58V36"/><path d="M32 36c-12-3-18-11-18-21 9-4 16 1 18 9 2-8 9-13 18-9 0 10-6 18-18 21Z"/><path d="M24 26c0-6 3-10 8-10s8 4 8 10c0 5-4 8-8 8s-8-3-8-8Z"/></svg></span>
+        <h2>Акции и спецпредложения</h2>
+      </div>
+      <div class="promos">
+        <article class="promo"><div><strong>Хит продаж</strong><b>25 роз = 25 000₸</b><p>+ подарок</p></div><div class="promo-img"></div></article>
+        <article class="promo"><div><b>Комбо подарки</b><p>цветы + сладости - идеальный подарок</p></div><div class="promo-img"></div></article>
+        <article class="promo"><div><b>Поздние заказы до 01:00</b><p>срочные доставки ночью</p></div><div class="promo-img"></div></article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="review-panel">
+        <span class="rose-icon" aria-hidden="true"><svg viewBox="0 0 64 64"><path d="M32 58V36"/><path d="M32 36c-12-3-18-11-18-21 9-4 16 1 18 9 2-8 9-13 18-9 0 10-6 18-18 21Z"/><path d="M24 26c0-6 3-10 8-10s8 4 8 10c0 5-4 8-8 8s-8-3-8-8Z"/></svg></span>
+        <h2>Отзывы наших клиентов</h2>
+        <div class="score"><strong>5.0</strong><span class="stars">★★★★★</span><span class="count">95 отзывов</span></div>
+        <div class="review-list">
+          <article class="review"><div class="avatar"></div><p>Очень свежие цветы,<br>доставка быстрая!</p></article>
+          <article class="review"><div class="avatar"></div><p>Красиво оформили,<br>девушка в восторге!</p></article>
+          <article class="review"><div class="avatar"></div><p>Заказывал ночью -<br>привезли вовремя</p></article>
+        </div>
+        <a class="pill" href="#" style="margin-top:22px">Читать все отзывы</a>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <span class="rose-icon" aria-hidden="true"><svg viewBox="0 0 64 64"><path d="M32 58V36"/><path d="M32 36c-12-3-18-11-18-21 9-4 16 1 18 9 2-8 9-13 18-9 0 10-6 18-18 21Z"/><path d="M24 26c0-6 3-10 8-10s8 4 8 10c0 5-4 8-8 8s-8-3-8-8Z"/></svg></span>
+        <h2>Контакты</h2>
+      </div>
+      <div class="contacts">
+        <div class="contact-row"><span class="contact-icon"><svg class="icon" viewBox="0 0 24 24"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg></span><span>пр. Ракымжан Кошкарбаев, 48<br>(цокольный этаж), Астана</span></div>
+        <div class="contact-row"><span class="contact-icon"><svg class="icon" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.7 19.7 0 0 1-8.6-3.1 19.3 19.3 0 0 1-6-6A19.7 19.7 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2Z"/></svg></span><span>+7 700 260 7218</span></div>
+        <div class="contact-row"><span class="contact-icon"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v6l4 2"/></svg></span><span>Ежедневно: 09:00 - 01:00</span></div>
+        <div class="map-card">
+          <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=71.486629%2C51.113084%2C71.506629%2C51.123084&amp;layer=mapnik&amp;marker=51.118084%2C71.496629" title="GARDENROSE на карте" loading="lazy"></iframe>
+          <a class="map-open" href="https://2gis.kz/astana/firm/70000001109974083?m=71.496629%2C51.118084%2F13.19" target="_blank" rel="noopener">Открыть в 2ГИС</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="job">
+      <div class="florist"></div>
+      <div>
+        <p class="job-title">Требуется флорист</p>
+        <div class="salary">150 000 - 250 000₸</div>
+        <ul>
+          <li>опыт приветствуется</li>
+          <li>аккуратность</li>
+          <li>любовь к цветам</li>
+        </ul>
+        <a class="btn whatsapp" href="https://wa.me/77002607218?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D1%85%D0%BE%D1%87%D1%83%20%D1%83%D0%B7%D0%BD%D0%B0%D1%82%D1%8C%20%D0%BE%20%D0%B2%D0%B0%D0%BA%D0%B0%D0%BD%D1%81%D0%B8%D0%B8%20%D1%84%D0%BB%D0%BE%D1%80%D0%B8%D1%81%D1%82%D0%B0" target="_blank" rel="noopener" style="width:max-content;min-height:46px">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M20 11.5a8.4 8.4 0 0 1-12.5 7.3L3 20l1.3-4.2A8.4 8.4 0 1 1 20 11.5Z"/><path d="M9 8.5c.2 3.2 2.1 5.3 5.3 6 .5.1 1-.2 1.2-.6l.4-.8c.1-.3 0-.6-.2-.8l-1.1-.8c-.3-.2-.7-.2-1 0l-.5.4c-.9-.5-1.6-1.2-2.1-2.1l.4-.5c.2-.3.2-.7 0-1L10.6 7c-.2-.3-.5-.4-.8-.3l-.8.3c-.4.2-.7.7-.6 1.2Z"/></svg>
+          Написать в WhatsApp
+        </a>
+      </div>
+      <div class="tools"></div>
+    </section>
+
+    <footer class="footer">
+      <span>Спасибо, что выбираете нас!</span>
+      <span>Мы дарим эмоции и заботу в каждом букете</span>
+    </footer>
+  </main>
+
+  <script>
+    const totalSeconds = 2 * 60 * 60 + 15 * 60 + 47;
+    const storageKey = "gardenrose-countdown-start";
+    const savedStart = Number(localStorage.getItem(storageKey));
+    const start = Number.isFinite(savedStart) && savedStart > 0 ? savedStart : Date.now();
+
+    if (!savedStart) {
+      localStorage.setItem(storageKey, String(start));
+    }
+
+    const pad = (value) => String(value).padStart(2, "0");
+
+    function updateTimer() {
+      const elapsed = Math.floor((Date.now() - start) / 1000);
+      const remaining = totalSeconds - (elapsed % totalSeconds);
+      const hours = Math.floor(remaining / 3600);
+      const minutes = Math.floor((remaining % 3600) / 60);
+      const seconds = remaining % 60;
+
+      document.getElementById("hours").textContent = pad(hours);
+      document.getElementById("minutes").textContent = pad(minutes);
+      document.getElementById("seconds").textContent = pad(seconds);
+    }
+
+    updateTimer();
+    setInterval(updateTimer, 1000);
+  </script>
+</body>
+</html>
